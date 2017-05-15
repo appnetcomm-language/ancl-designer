@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label>Services</label>
+  <button class="btn btn-xs btn-info pull-right" ng-click="addService()"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+  <div class="list-group" style="max-height: 20em; overflow: auto">
+    <a href="#" class="list-group-item list-group-item-warning" ng-hide="hasServices(ngModel)" ng-click="addService()">No Ingress Services Defined</a>
+    <a href="#" class="list-group-item" ng-repeat="service in ngModel" ng-click="editService($index)">
+      <button class="btn btn-xs btn-danger pull-right" ng-click="deleteService($index); $event.stopPropagation();"><i class="icon-trash"></i></button>
+      <h4 class="list-group-item-heading">{{service.name}}</h4>
+      <p class="list-group-item-text">
+        <ul style="max-height: 6em; overflow: auto">
+          <li ng-repeat="policy in service.ports">
+            <span ng-show="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}</span>
+            <span ng-hide="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}-{{policy.end}}</span>
+          </li>
+        </ul>
+      </p>
+    </a>
+  </div>
+</div>

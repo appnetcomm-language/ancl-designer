@@ -1,0 +1,20 @@
+{
+  "name": "ancl-designer",
+  "version": "0.0.0",
+  "authors": [
+    ""
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngCytoscape": "~0.0.6",
+    "js-yaml": "~3.8.2",
+    "bootstrap": "~3.3.7"
+  }
+}

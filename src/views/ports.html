@@ -1,0 +1,13 @@
+
+<div class="form-group">
+  <label>Ports</label>
+  <button class="btn btn-xs btn-info pull-right" ng-click="addPort()"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+  <div class="list-group" style="max-height: 20em; overflow: auto">
+    <a href="#" class="list-group-item list-group-item-warning" ng-hide="ngModel.length > 0" ng-click="addPort()">No Service Ports Defined</a>
+    <a href="#" class="list-group-item" ng-repeat="port in ngModel" ng-click="editPort($index)">
+      <span ng-show="port.start == port.end">{{port.protocol | uppercase}}/{{port.start}}</span>
+      <span ng-hide="port.start == port.end">{{port.protocol | uppercase}}/{{port.start}}-{{port.end}}</span>
+      <button class="btn btn-xs btn-danger pull-right" ng-click="deletePort($index); $event.stopPropagation();"><i class="icon-trash"></i></button>
+    </a>
+  </div>
+</div>

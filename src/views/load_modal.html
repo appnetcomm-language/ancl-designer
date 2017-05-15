@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Load Model</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="loadForm">
+      <div class="form-group">
+        <label for="targetInput">File</label>
+        <file-reader ng-model="load.contents" on-parsed="parseModel"></file-reader>
+      </div>
+      <div class="form-group">
+        <label for="nameInput">Models</label>
+        <ul class="list-group" style="max-height: 10em; overflow: auto" ng-hide="load.nodes.length > 0">
+          <li class="list-group-item">None</li>
+        </ul>
+        <select class="form-control" size="1" ng-model="layout.name" ng-options="o.value as o.label for o in layouts" ng-show="load.nodes.length > 0"></select>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <cytoscape id="load_graph" graph-options="options" graph-elements="elements" graph-layout="layout" graph-style="style"></cytoscape>
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="!load.elements"><i class="icon-save-floppy"></i> Load</button>
+</div>

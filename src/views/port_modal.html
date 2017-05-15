@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title"><span ng-show="adding">Add Port</span><span ng-hide="adding">Edit Port</span></h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="portForm">
+      <div class="row">
+        <div class="col-xs-4"><label>Start</label></div>
+        <div class="col-xs-4"><label>End</label></div>
+        <div class="col-xs-4"><label>Protocol</label></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group" ng-class="{'has-success': portForm.startInput.$valid, 'has-error': portForm.startInput.$invalid && portForm.startInput.$dirty}">
+            <input type="number" class="form-control" id="startInput" name="startInput" ng-change="port.end = port.start" placeholder="Start" ng-model="port.start" required focus>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group" ng-class="{'has-success': portForm.endInput.$valid, 'has-error': portForm.endInput.$invalid && portForm.endInput.$dirty}">
+            <input type="number" class="form-control" id="endInput" name="endInput" placeholder="Start" ng-model="port.end" required >
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group" ng-class="{'has-success': portForm.protoSelect.$valid, 'has-error': portForm.protoSelect.$invalid && portForm.protoSelect.$dirty}">
+            <select class="form-control" size="1" name="protoSelect" ng-model="port.protocol" ng-options="o as o for o in protocols"></select>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="portForm.$invalid">
+      <span ng-show="adding"><i class="icon-circleadd"></i> Add</span>
+      <span ng-hide="adding"><i class="icon-save-floppy"></i> Save</span>
+    </button>
+</div>

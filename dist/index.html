@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="ancl">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>ANCL Designer</title>
+    <script src="./lib/main.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./lib/styles.css">
+  </head>
+
+  <body ng-controller="anclCtl">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ANCL Designer</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#" ng-click="openAddModel()" ng-disabled="linking">
+              <span ng-show="!adding"><i class="glyphicon glyphicon-plus-sign"></i> Add Model</span>
+              <span ng-show="adding">Cancel</span>
+            </a></li>
+            <li><a href="#" ng-click="openAddComponent()" ng-disabled="linking">
+              <span ng-show="!adding"><i class="glyphicon glyphicon-plus-sign"></i> Add Component</span>
+              <span ng-show="adding">Cancel</span>
+            </a></li>
+            <li><a href="#" ng-click="openAddLink()" ng-disabled="adding || editing">
+              <span ng-show="!linking"><i class="glyphicon glyphicon-link"></i> Add Link</span>
+              <span ng-show="linking">Cancel</span>
+            </a></li>
+            <li><a href="#" ng-click="clearElements()" ng-disabled="adding || editing || loading || linking"><i class="glyphicon glyphicon-remove-circle"></i> Clear</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" ng-click="openLoad()" ng-disabled="adding || editing">
+              <span ng-show="!loading"><i class="glyphicon glyphicon-upload"></i> Load</span>
+              <span ng-show="loading">Cancel</span>
+            </a></li>
+            <li><a href="#" ng-click="downloadModel()">
+              <span><i class="glyphicon glyphicon-download"></i> Download</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <cytoscape id="main_graph" graph-options="options" graph-elements="elements" graph-layout="layout" graph-style="style"></cytoscape>
+  </body>
+
+</html>

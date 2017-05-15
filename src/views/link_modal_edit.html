@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Edit Link</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="linkForm">
+     <div class="form-group">
+        <label for="sourceInput">Source</label>
+        <input type="text" class="form-control valid-node" id="sourceInput" name="sourceInput" placeholder="Source" ng-model="source.data.label" readonly>
+      </div>
+      <div class="form-group">
+        <label for="targetInput">Target</label>
+        <input type="text" class="form-control valid-node" id="targetInput" name="targetInput" placeholder="Target" ng-model="target.data.label" readonly>
+      </div>
+      <div class="form-group">
+        <label>Service</label>
+        <ul class="list-group" style="max-height: 20em; overflow: auto">
+          <li class="list-group-item" ng-repeat="service in target.data.ingress" ng-class="{'active': service.name == link.label}">
+            <h4 class="list-group-item-heading">{{service.name}}</h4>
+            <ul style="max-height: 6em; overflow: auto">
+              <li ng-repeat="policy in service.ports">
+                <span ng-show="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}</span>
+                <span ng-hide="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}-{{policy.end}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>Classes</label>
+        <input type="text" class="form-control" name="classesInput" placeholder="Classes" ng-model="link.classes">
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="linkForm.$invalid"><i class="icon-save-floppy"></i> Save</button>
+    <button class="btn btn-danger pull-left" type="button" ng-click="delete()"><i class="icon-trash"></i> Delete</button>
+</div>

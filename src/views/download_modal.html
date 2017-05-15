@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Download Model</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="downloadForm">
+      <div class="form-group" class="form-group">
+        <label for="nameInput">Name</label>
+        <input type="text" class="form-control" name="nameInput" placeholder="Model Name" ng-model="settings.name" required>
+      </div>
+      <div class="form-group">
+        <label for="nameInput">Models</label>
+        <div class="list-group" style="max-height: 20em; overflow: auto">
+          <a href="#" class="list-group-item list-group-item-danger" ng-hide="hasModels()"">Nothing to Export</a>
+          <a href="#" class="list-group-item" ng-repeat="model in settings.models" ng-click="model.metadata.export = !model.metadata.export">
+            <span ng-show="model.metadata.export"><i class="glyphicon glyphicon-ok-circle text-success"></i></span><span ng-hide="model.metadata.export"><i class="glyphicon glyphicon-ban-circle text-muted"></i></span><span> {{model.name}}</span>
+          </a>
+        </div>
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="download()" ng-disabled="downloadForm.$invalid || !hasModels()"><i class="glyphicon glyphicon-download"></i> Download</button>
+</div>

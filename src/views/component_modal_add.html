@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add Component</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="linkForm">
+     <div class="form-group" ng-class="{'has-success': linkForm.labelInput.$valid, 'has-error': linkForm.labelInput.$invalid && linkForm.labelInput.$dirty}">
+        <label for="labelInput">Component</label>
+        <input type="text" class="form-control valid-node" id="labelInput" name="labelInput" placeholder="Component" ng-model="node.label" required is-not-node="elements" focus ng-class="{'valid-node': linkForm.labelInput.$valid}">
+      </div>
+      <div class="form-group" ng-class="{'has-success': linkForm.parentInput.$valid && node.parent, 'has-error': linkForm.parentInput.$invalid && linkForm.parentInput.$dirty}">
+        <label for="parentInput">Model</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="parentInput" name="parentInput" placeholder="Parent" required ng-model="node.parent" is-node="elements" uib-typeahead="element for element in elements" ng-class="{'valid-node': linkForm.parentInput.$valid && node.parent}">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-class="{'btn-success': linkForm.parentInput.$valid && node.parent, 'btn-danger': linkForm.parentInput.$invalid && linkForm.parentInput.$dirty}" ng-click="select('source')"><i class="icon-eyedropper"></i></button>
+            </span>
+        </div>
+      </div>
+      <services ng-model="node.ingress"></services>
+      <div class="form-group" class="form-group">
+        <label for="classesInput">Classes</label>
+        <input type="text" class="form-control" name="classesInput" placeholder="Classes" ng-model="node.classes">
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="linkForm.$invalid"><i class="icon-circleadd"></i> Add</button>
+</div>

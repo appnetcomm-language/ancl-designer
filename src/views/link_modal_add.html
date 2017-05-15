@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add Link</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="linkForm">
+     <div class="form-group" ng-class="{'has-success': linkForm.sourceInput.$valid, 'has-error': linkForm.sourceInput.$invalid && linkForm.sourceInput.$dirty}">
+        <label for="sourceInput">Source</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="sourceInput" name="sourceInput" placeholder="Source" ng-model="link.source" required is-node="elements" uib-typeahead="element for element in elements | filter:$viewValue | limitTo:8" ng-class="{'valid-node': linkForm.sourceInput.$valid}">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-class="{'btn-success': linkForm.sourceInput.$valid, 'btn-danger': linkForm.sourceInput.$invalid && linkForm.sourceInput.$dirty}" ng-click="select('source')"><i class="icon-eyedropper"></i></button>
+            </span>
+        </div>
+      </div>
+      
+      <div class="form-group" ng-class="{'has-success': linkForm.targetInput.$valid, 'has-error': linkForm.targetInput.$invalid && linkForm.targetInput.$dirty}">
+        <label for="targetInput">Target</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="targetInput" name="targetInput" placeholder="Target" ng-model="link.target" required is-node="elements" uib-typeahead="element for element in elements | filter:$viewValue | limitTo:8" ng-class="{'valid-node': linkForm.sourceInput.$valid}" ng-change="loadTarget(link.target)">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-class="{'btn-success': linkForm.targetInput.$valid, 'btn-danger': linkForm.targetInput.$invalid && linkForm.targetInput.$dirty}" ng-click="select('target')"><i class="icon-eyedropper"></i></button>
+            </span>
+        </div>
+      </div>
+      <div class="form-group" class="form-group">
+        <label for="portInput">Service</label>
+        <div class="list-group" style="max-height: 20em; overflow: auto">
+          <a href="#" class="list-group-item list-group-item-warning" ng-hide="target">No target specified</li>
+          <a href="#" class="list-group-item list-group-item-danger" ng-show="target && !hasServices(target.data.ingress)">Target has no ingress defined</a>
+          <a href="#" class="list-group-item" ng-repeat="service in target.data.ingress" ng-class="{'active': service.name == link.service.name}" ng-click="link.service = service">
+            <h4 class="list-group-item-heading">{{service.name}}</h4>
+            <ul style="max-height: 6em; overflow: auto">
+              <li ng-repeat="policy in service.ports">
+                <span ng-show="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}</span>
+                <span ng-hide="policy.start == policy.end">{{policy.protocol | uppercase}}/{{policy.start}}-{{policy.end}}</span>
+              </li>
+            </ul>
+          </a>
+        </div>
+      </div>
+      <div class="form-group" class="form-group">
+        <label for="classesInput">Classes</label>
+        <input type="text" class="form-control" name="classesInput" placeholder="Classes" ng-model="link.classes">
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="linkForm.$invalid"><i class="icon-circleadd"></i> Add</button>
+</div>

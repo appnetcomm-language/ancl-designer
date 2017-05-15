@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Edit Model</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <form name="linkForm">
+     <div class="form-group" ng-class="{'has-success': linkForm.labelInput.$valid, 'has-error': linkForm.labelInput.$invalid && linkForm.labelInput.$dirty}">
+        <label for="nameInput">Name</label>
+        <input type="text" class="form-control valid-node" id="labelInput" name="labelInput" placeholder="Name" ng-model="node.label" required is-not-node="elements" focus ng-class="{'valid-node': linkForm.labelInput.$valid}">
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="done()" ng-disabled="linkForm.$invalid"><i class="icon-circleadd"></i> Add</button>
+</div>
